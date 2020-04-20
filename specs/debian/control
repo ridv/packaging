@@ -1,6 +1,6 @@
-Source: apache-aurora
+Source: aurora-scheduler
 Priority: optional
-Maintainer: The Apache Aurora authors <dev@aurora.apache.org>
+Maintainer: The Aurora Scheduler authors <dev@aurora-scheduler.github.io>
 Build-Depends: debhelper (>= 9),
  java8-sdk | openjdk-8-jdk,
  gradle (>= 4.2) | gradle-4.2,
@@ -12,7 +12,7 @@ Build-Depends: debhelper (>= 9),
  wget
 Section: net
 Standards-Version: 3.9.5
-Homepage: https://aurora.apache.org
+Homepage: https://aurora-scheduler.github.io
 
 Package: aurora-scheduler
 Architecture: any
@@ -23,7 +23,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  mesos (>= 1.5.0)
 Recommends: aurora-tools
 Suggests: aurora-doc
-Description: Apache Aurora scheduler
+Description: Aurora Scheduler
  Aurora is a service scheduler that runs on top of Apache Mesos, enabling you
  to run long-running services that take advantage of Apache Mesos' scalability,
  fault-tolerance, and resource isolation.
@@ -37,7 +37,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  python2.7
 Suggests: aurora-doc
 Recommends: libkrb5-3 | libkrb5-26-heimdal
-Description: Apache Aurora commandline tools
+Description: Aurora Scheduler commandline tools
  Aurora is a service scheduler that runs on top of Apache Mesos, enabling you
  to run long-running services that take advantage of Apache Mesos' scalability,
  fault-tolerance, and resource isolation.
@@ -56,7 +56,7 @@ Recommends:
  aurora-tools,
  lxc-docker (>= 1.0) | docker.io (>= 1.0)
 Suggests: aurora-doc
-Description: Apache Aurora executor deployment
+Description: Aurora Scheduler executor deployment
  Aurora is a service scheduler that runs on top of Apache Mesos, enabling you
  to run long-running services that take advantage of Apache Mesos' scalability,
  fault-tolerance, and resource isolation.
@@ -69,7 +69,7 @@ Package: aurora-doc
 Architecture: all
 Section: doc
 Depends: ${misc:Depends}
-Description: Documentation for Apache Aurora
+Description: Documentation for Aurora Scheduler
  Aurora is a service scheduler that runs on top of Apache Mesos, enabling you
  to run long-running services that take advantage of Apache Mesos' scalability,
  fault-tolerance, and resource isolation.

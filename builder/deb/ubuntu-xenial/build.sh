@@ -15,10 +15,12 @@
 
 set -ex
 
+GIT_TAG=$1
+
 mkdir /scratch
 cd /scratch
 
-tar --strip-components 1 -C . -xf /src.tar.gz
+git clone -b "$GIT_TAG" --single-branch --depth 1 https://github.com/aurora-scheduler/aurora.git /scratch
 
 cp -R /specs/debian .
 
@@ -26,23 +28,17 @@ cp -R /specs/debian .
 # Avoid conflict by not including them for now.
 rm ./debian/*.upstart ./debian/*.init
 
-DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
-CODENAME=$(lsb_release -cs | tr '[:upper:]' '[:lower:]')
-THIRD_PARTY_REPO="https://svn.apache.org/repos/asf/aurora/3rdparty/"
-THIRD_PARTY_REPO+="${DISTRO}/${CODENAME}64/python/"
+# Remove executor and tools. Only build scheduler and docs.
+rm ./debian/aurora-executor.* ./debian/aurora-pants* ./debian/aurora-tools.*
 
-# Place the link to the correct python egg into aurora-pants.ini
-echo "[python-repos]" >> ./debian/aurora-pants.ini
-echo "repos: ['third_party/', '${THIRD_PARTY_REPO}']" >> ./debian/aurora-pants.ini
-
-export DEBFULLNAME='Apache Aurora'
-export DEBEMAIL='dev@aurora.apache.org'
+export DEBFULLNAME='Aurora Scheduler'
+export DEBEMAIL='dev@aurora-scheduler.github.io'
 
 dch \
-  --newversion $AURORA_VERSION \
-  --package apache-aurora \
+  --newversion "$GIT_TAG" \
+  --package aurora-scheduler \
   --urgency medium \
-  "Apache Aurora package builder <dev@aurora.apache.org> $(date -R)"
+  "Aurora Scheduler package builder <dev@aurora-scheduer.github.io> $(date -R)"
 dch --release ''
 
 dpkg-buildpackage -uc -b -tc

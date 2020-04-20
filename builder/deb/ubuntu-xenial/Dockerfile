@@ -41,7 +41,7 @@ RUN apt-get -y install openjdk-8-jdk \
   && update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 
 # Install gradle.
-RUN git clone --depth 1 https://github.com/benley/gradle-packaging \
+RUN git clone --depth 1 https://github.com/aurora-scheduler/gradle-packaging \
   && cd gradle-packaging \
   && apt-get -y install ruby ruby-dev unzip wget \
   && gem install fpm && ./gradle-mkdeb.sh 4.2 \
@@ -49,4 +49,6 @@ RUN git clone --depth 1 https://github.com/benley/gradle-packaging \
   && gdebi --non-interactive gradle-4.2_4.2-2_all.deb \
   && cd .. && rm -rf gradle-packaging
 
-ADD build.sh /build.sh
+COPY specs/debian /specs/debian
+
+ADD builder/deb/ubuntu-xenial/build.sh /build.sh

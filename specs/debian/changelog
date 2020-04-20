@@ -1,36 +1,6 @@
-apache-aurora (0.13.0) trusty; urgency=medium
+aurora-scheduler (0.22.1) xenial; urgency=medium
 
-  * Like Aurora, Thermos is now logging to stderr rather than to disk.
-  * Change default configuration to enable the Thermos announcer.
-  * Apache Aurora package builder <dev@aurora.apache.org> Mon, 20 Jun
-    2016 18:12:09 +0000
+  * First release as a stand-alone project.
+  * Provides a bug fix for the batch auto pause feature.
 
- -- Apache Aurora <dev@aurora.apache.org>  Mon, 20 Jun 2016 18:12:10 +0000
-
-apache-aurora (0.12.0) trusty; urgency=medium
-
-  * Apache Aurora package builder <dev@aurora.apache.org> Mon, 7 Mar
-    2016 15:50:06 +0000
-
- -- Apache Aurora <dev@aurora.apache.org>  Mon, 7 Mar 2016 15:50:06 +0000
-
-apache-aurora (0.11.0) trusty; urgency=medium
-
-  * Apache Aurora package builder <dev@aurora.apache.org> Wed, 23 Dec
-    2015 17:06:51 +0000
-
- -- Apache Aurora <dev@aurora.apache.org>  Wed, 23 Dec 2015 17:06:51 +0000
-
-apache-aurora (0.10.0) trusty; urgency=medium
-
-  * Apache Aurora package builder <dev@aurora.apache.org> Wed, 25 Nov
-    2015 23:31:44 +0000
-
- -- Apache Aurora <dev@aurora.apache.org>  Wed, 25 Nov 2015 23:31:44 +0000
-
-apache-aurora (0.9.0) trusty; urgency=medium
-
-  * Apache Aurora package builder <dev@aurora.apache.org> Wed, 26 Aug
-    2015 05:22:37 +0000
-
- -- Apache Aurora <dev@aurora.apache.org>  Wed, 26 Aug 2015 05:22:37 +0000
+-- Aurora Scheduler <dev@aurora-scheduler.github.io>  Sat, 18 Apr 2020 12:00:00 +0000
