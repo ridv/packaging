@@ -3,4 +3,5 @@ aurora-scheduler (0.22.1) xenial; urgency=medium
   * First release as a stand-alone project.
   * Provides a bug fix for the batch auto pause feature.
 
--- Aurora Scheduler <dev@aurora-scheduler.github.io>  Sat, 18 Apr 2020 12:00:00 +0000
+ -- Aurora Scheduler <dev@aurora-scheduler.github.io>  Sat, 18 Apr 2020 12:00:00 +0000
+
