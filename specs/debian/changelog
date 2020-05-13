@@ -1,4 +1,4 @@
-aurora-scheduler (0.22.1) xenial; urgency=medium
+aurora-scheduler (0.23.0) xenial; urgency=medium
 
   * First release as a stand-alone project.
   * Provides a bug fix for the batch auto pause feature.

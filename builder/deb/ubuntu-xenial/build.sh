@@ -16,11 +16,12 @@
 set -ex
 
 GIT_TAG=$1
+GIT_REPO=${GIT_REPO:-"https://github.com/aurora-scheduler/aurora.git"}
 
 mkdir /scratch
 cd /scratch
 
-git clone -b "$GIT_TAG" --single-branch --depth 1 https://github.com/aurora-scheduler/aurora.git /scratch
+git clone -b "$GIT_TAG" --single-branch --depth 1 $GIT_REPO /scratch
 
 cp -R /specs/debian .
 
