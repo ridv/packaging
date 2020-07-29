@@ -17,7 +17,7 @@ set -ex
 
 GIT_TAG=$1
 
-mkdir /scratch
+mkdir -p /scratch
 cd /scratch
 
 git clone -b "$GIT_TAG" --single-branch --depth 1 https://github.com/aurora-scheduler/aurora.git /scratch
