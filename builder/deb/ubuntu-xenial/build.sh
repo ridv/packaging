@@ -28,9 +28,6 @@ cp -R /specs/debian .
 # Avoid conflict by not including them for now.
 rm ./debian/*.upstart ./debian/*.init
 
-# Remove executor and tools. Only build scheduler and docs.
-rm ./debian/aurora-executor.* ./debian/aurora-pants* ./debian/aurora-tools.*
-
 DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
 CODENAME=$(lsb_release -cs | tr '[:upper:]' '[:lower:]')
 THIRD_PARTY_REPO="https://svn.apache.org/repos/asf/aurora/3rdparty/"

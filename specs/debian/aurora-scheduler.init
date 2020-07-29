@@ -30,7 +30,7 @@
 ### END INIT INFO
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
-DESC="Aurora scheduler"
+DESC="Aurora Scheduler"
 NAME=aurora-scheduler
 DAEMON=/usr/sbin/aurora-scheduler
 PIDFILE=/var/run/aurora-scheduler.pid

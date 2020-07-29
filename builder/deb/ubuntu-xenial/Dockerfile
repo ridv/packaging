@@ -44,9 +44,9 @@ RUN apt-get -y install openjdk-8-jdk \
 RUN git clone --depth 1 https://github.com/aurora-scheduler/gradle-packaging \
   && cd gradle-packaging \
   && apt-get -y install ruby ruby-dev unzip wget \
-  && gem install fpm && ./gradle-mkdeb.sh 4.2 \
+  && gem install fpm && ./gradle-mkdeb.sh 5.6.4 \
   && apt-get -y install gdebi-core \
-  && gdebi --non-interactive gradle-4.2_4.2-2_all.deb \
+  && gdebi --non-interactive gradle-5.6.4_5.6.4-2_all.deb \
   && cd .. && rm -rf gradle-packaging
 
 COPY specs/debian /specs/debian

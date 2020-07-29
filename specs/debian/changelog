@@ -1,7 +1,28 @@
-aurora-scheduler (0.22.1) xenial; urgency=medium
+aurora-scheduler (0.23.0) xenial; urgency=medium
 
   * First release as a stand-alone project.
-  * Provides a bug fix for the batch auto pause feature.
+  * Updated to Mesos 1.7.2.
+  * Updated node dependencies including eslint to 7.5.0.
+  * Bumped up Node version to 12.18.3
+  * com.github.node-gradle.node plugin bumped up to 2.2.4
+  * Added UNSAFE prefixes to the required functions in react code.
+  * Updated Quartz Scheduler to 2.3.1
+  * Updated Gradle to version 5.6.4
+  * Updated Guava to 29.0-jre
+  * Updated SpotBugs to 4.2.0
+  * Updated Commons to 3.10
+  * Updated Guice to 4.2.3
+  * Improved the way Updates handle paused/resumed updates where instance updates previously
+    failed. Previously, upon resuming a paused update, previously failed updates would be retried.
+    This would make updates take longer than expected, specifically when using the auto*pause
+    mechanism.
+  * Modified auto-pause mechanism to address a corner case where the status of an instance in a batch
+    would not enter a terminal state before the batch was paused. This resulted in undesired behavior
+    when the updated was resumed if that instance update had failed.
+  * Auto-pause update mechanism now makes sure all instances have entered a terminal state
+    [SUCCEDED, FAILED] before pausing the update. With this change, the final pause to
+    acknowledge an update had sucessfully completed has also been dropped.
+  * Support has been added to use a resource with the key ips from Mesos.
 
- -- Aurora Scheduler <dev@aurora-scheduler.github.io>  Sat, 18 Apr 2020 12:00:00 +0000
+ -- Aurora Scheduler <dev@aurora-scheduler.github.io>  Tue, 28 Jul 2020 17:52:48 -0700
 
