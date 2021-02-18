@@ -30,8 +30,8 @@ rm ./debian/*.upstart ./debian/*.init
 
 DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
 CODENAME=$(lsb_release -cs | tr '[:upper:]' '[:lower:]')
-THIRD_PARTY_REPO="https://svn.apache.org/repos/asf/aurora/3rdparty/"
-THIRD_PARTY_REPO+="${DISTRO}/${CODENAME}64/python/"
+THIRD_PARTY_REPO="https://dl.bintray.com/aurora-scheduler/python-eggs/"
+THIRD_PARTY_REPO+="${DISTRO}/${CODENAME}64/"
 
 # Place the link to the correct python egg into aurora-pants.ini
 echo "[python-repos]" >> ./debian/aurora-pants.ini
@@ -44,7 +44,7 @@ dch \
   --newversion "$GIT_TAG" \
   --package aurora-scheduler \
   --urgency medium \
-  "Aurora Scheduler package builder <dev@aurora-scheduer.github.io> $(date -R)"
+  "Aurora Scheduler package builder <dev@aurora-scheduler.github.io> $(date -R)"
 dch --release ''
 
 dpkg-buildpackage -uc -b -tc

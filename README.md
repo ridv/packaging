@@ -20,8 +20,8 @@ from the Aurora source repository:
    Aurora 0.22.0 debs for Ubuntu Xenial.
 
         ./build-artifact.sh builder/deb/ubuntu-xenial \
-          ../apache-aurora-0.22.0.tar.gz \
-          0.22.0
+          ../apache-aurora-0.23.0.tar.gz \
+          0.23.0
 
 When this completes, debs will be placed in `artifacts/aurora-ubuntu-xenial/dist/`.
 
@@ -34,9 +34,9 @@ in order to proceed.
 
 #### Cut a branch and build the binaries
 
-The example below is for the 0.12.0 release where upstream is https://github.com/aurora-scheduler/packaging
+The example below is for the 0.23.0 release where upstream is https://github.com/aurora-scheduler/packaging
 
-    git checkout -b 0.12.x upstream/master
+    git checkout -b 0.23.x upstream/master
 
 Now run the [Building a binary](#building-a-binary) procedure detailed above.
 
