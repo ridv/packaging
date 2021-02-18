@@ -18,6 +18,10 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 
+RUN apt-get update && \
+  apt-get -y install software-properties-common && \
+  add-apt-repository ppa:deadsnakes/ppa
+
 # Using gcc-4.8 to ensure ABI for thermos in containers running older distros
 RUN apt-get update && apt-get -y install \
   bison \
@@ -33,7 +37,8 @@ RUN apt-get update && apt-get -y install \
   libssl-dev \
   libsvn-dev \
   libffi-dev \
-  python-all-dev \
+  python3.8-dev \
+  python3.8-distutils \
   software-properties-common \
   libkrb5-dev
 

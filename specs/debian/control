@@ -4,7 +4,8 @@ Maintainer: The Aurora Scheduler authors <dev@aurora-scheduler.github.io>
 Build-Depends: debhelper (>= 9),
  java8-sdk | openjdk-8-jdk,
  gradle (>= 5.6.4) | gradle-5.6.4,
- python-all-dev,
+ python3.8-dev,
+ python3.8-distutils,
  libkrb5-dev,
  curl,
  openssl,
@@ -20,7 +21,7 @@ Section: net
 Depends: ${shlibs:Depends}, ${misc:Depends},
  adduser,
  openjdk-8-jre-headless | java8-runtime-headless,
- mesos (>= 1.5.0)
+ mesos (>= 1.7.0)
 Recommends: aurora-tools
 Suggests: aurora-doc
 Description: Aurora Scheduler
