@@ -1,4 +1,10 @@
-aurora-scheduler (0.24.0_rc4) xenial; urgency=medium
+aurora-scheduler (0.24.1) xenial; urgency=medium
+
+  * Pants upgrade to 1.26
+
+ -- Aurora Scheduler <dev@aurora-scheduler.github.io>  Thu, 18 Feb 2021 15:44:12 -0800
+
+aurora-scheduler (0.24.0) xenial; urgency=medium
 
   * Codegen port from python 2 to 3
   * Bump eslint-plugin-standard from 3.1.0 to 4.0.1 in /ui

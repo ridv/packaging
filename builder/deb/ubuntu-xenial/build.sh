@@ -20,7 +20,13 @@ GIT_TAG=$1
 mkdir -p /scratch
 cd /scratch
 
-git clone -b "$GIT_TAG" --single-branch --depth 1 https://github.com/aurora-scheduler/aurora.git /scratch
+FILE=/tarball/aurora-scheduler.tar.gz
+
+if [ -f "$FILE" ]; then
+  tar -C /scratch  -xf "$FILE"
+else
+  git clone -b "$GIT_TAG" --single-branch --depth 1 https://github.com/aurora-scheduler/aurora.git /scratch
+fi
 
 cp -R /specs/debian .
 
@@ -28,20 +34,13 @@ cp -R /specs/debian .
 # Avoid conflict by not including them for now.
 rm ./debian/*.upstart ./debian/*.init
 
-DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
-CODENAME=$(lsb_release -cs | tr '[:upper:]' '[:lower:]')
-THIRD_PARTY_REPO="https://dl.bintray.com/aurora-scheduler/python-eggs/"
-THIRD_PARTY_REPO+="${DISTRO}/${CODENAME}64/"
-
-# Place the link to the correct python egg into aurora-pants.ini
-echo "[python-repos]" >> ./debian/aurora-pants.ini
-echo "repos: ['third_party/', '${THIRD_PARTY_REPO}']" >> ./debian/aurora-pants.ini
-
 export DEBFULLNAME='Aurora Scheduler'
 export DEBEMAIL='dev@aurora-scheduler.github.io'
 
+VERSION=$(</scratch/.auroraversion)
+
 dch \
-  --newversion "$GIT_TAG" \
+  --newversion "$VERSION" \
   --package aurora-scheduler \
   --urgency medium \
   "Aurora Scheduler package builder <dev@aurora-scheduler.github.io> $(date -R)"
@@ -49,5 +48,5 @@ dch --release ''
 
 dpkg-buildpackage -uc -b -tc
 
-mkdir /dist
+mkdir -p /dist
 mv ../*.deb /dist

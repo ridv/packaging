@@ -9,72 +9,42 @@ Binaries are built within Docker containers that provide the appropriate build
 environment for the target platform.  You will need to have a working Docker
 installation before proceeding.
 
-1. Fetch a source distribution, such as an [official one](https://aurora-scheduler.github.io/downloads/).
-   Alternatively, you can also build from an arbitrary git commit by instead preparing sources
-from the Aurora source repository:
 
-        git archive --prefix=apache-aurora-$(cat .auroraversion)/ -o snapshot.tar.gz HEAD
+#### Building a binary from a tarball
 
-2. Run the builder script, providing the distribution platform and the source
-   distribution archive you downloaded in (1).  The example below will build
-   Aurora 0.22.0 debs for Ubuntu Xenial.
 
-        ./build-artifact.sh builder/deb/ubuntu-xenial \
-          ../apache-aurora-0.23.0.tar.gz \
-          0.23.0
+1. Create a new directory called tarball:
+     `git archive -o aurora-scheduler.tar.gz HEAD`
 
-When this completes, debs will be placed in `artifacts/aurora-ubuntu-xenial/dist/`.
+2. In a directory outside of the repository, create a directory called `tarball` and a directory called `dist`
+    `mkdir tarball dist`
 
-### Creating a release candidate
+3. Copy the tarball into the tarball directory
+      `cp aurora-scheduler.tar.gz /tmp/aurora-build/tarball`
 
-Release candidates are hashed and signed binaries that are uploaded to bintray for
-easy access and testing by voters.  You will need to have a [bintray](https://bintray.com/)
-account and a generic repo created for the purpose of uploading the release candidate binaries
-in order to proceed.
+4. Change directories to the parent directory of the `tarball` and `dist` directories and run the builder image
+     `docker run -v $(pwd)/tarball:/tarball -v $(pwd)/dist:/dist aurorascheduler/packaging-scheduler:0.24.1 /build.sh`
 
-#### Cut a branch and build the binaries
+When this completes, debs will be placed in the `dist` folder.
+
+
+#### Building a released version
+
+1. Follow steps 2 and 3 in the building a binary from a tarball section.
+
+2. Run the builder image with the git tag of the release as an argument to the builder:
+     `docker run -v $(pwd)/tarball:/tarball -v $(pwd)/dist:/dist aurorascheduler/packaging-scheduler:0.24.1 /build.sh <git tag>`
+
+#### Building a new builder image
+
+* For Ubuntu Xenial
+
+From the root directory of this repo run:
+`docker build . -t aurorascheduler/packaging-scheduler:<version> -f builder/deb/ubuntu-xenial/Dockerfile`
+
+Where `<version` is the version being built.
+
+#### Cut a branch for a specific version
 
 The example below is for the 0.23.0 release where upstream is https://github.com/aurora-scheduler/packaging
-
-    git checkout -b 0.23.x upstream/master
-
-Now run the [Building a binary](#building-a-binary) procedure detailed above.
-
-#### Hash, sign and upload the binaries
-
-Run the following which will create a tarball for each distribution platform that can be uploaded to
-bintray:
-
-N.B.: the release-candidate script requires bash 4.x or higher.
-
-    ./build-support/release/release-candidate
-    Signing artifacts for centos-7...
-    Created archive for centos-7 artifacts at aurora-packaging/artifacts/aurora-centos-7/dist/rpmbuild/RPMS/upload.tar.
-    Signing artifacts for debian-jessie...
-    Created archive for debian-jessie artifacts at aurora-packaging/artifacts/aurora-debian-jessie/upload.tar.
-    Signing artifacts for ubuntu-xenial...
-    Created archive for ubuntu-xenial artifacts at aurora-packaging/artifacts/aurora-ubuntu-xenial/upload.tar.
-    All artifacts prepared for upload to bintray.
-
-In the bintray UI, create a new version in your release-candidate repo, for example '0.12.0'.  Then,
-in the version UI you can upload the artifacts. Bintray theoretically supports exploding tarballs on
-upload, but currently this functionality does not work (it fails to detect tarballs as explodable
-artifacts or, if it does, it tries to sign the artifacts, but fails due to a signature already being
-present, even when signing is disabled at the repo level).
-
-This is all to say, it's easier to just un-tar the various upload.tar files and upload their
-contents directly. This can be accomplished by dragging and dropping all files into the upload UI
-for the version you created.
-
-Finally, 'publish' the results.
-
-![bintray publish](docs/images/bintray-publish.png)
-
-### Adding a new distribution platform
-
-There are only two requirements for a 'builder' to satisfy:
-
-- a `Dockerfile` to provide the repeatable build environment
-- a `build.sh` script that creates artifacts
-
-Please see the makeup of other builders for examples.
+    `git checkout -b 0.23.x upstream/master`
